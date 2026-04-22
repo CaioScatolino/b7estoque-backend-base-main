@@ -1,4 +1,4 @@
-import { decimal, mysqlEnum, mysqlTable, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { datetime, decimal, mysqlEnum, mysqlTable, timestamp, varchar } from "drizzle-orm/mysql-core";
 import { categories } from "./categories";
 
 export const unitTypeEnum = mysqlEnum('unit_type', ['pç', 'kg', 'mt', 'L', 'ml', 'm', 'mm', 'cm', 'g', 'mg', 'un', 'bomba', 'ton', 'pct', 'par']);
@@ -12,7 +12,7 @@ export const products = mysqlTable('products', {
     quantity: decimal('quantity').notNull().default('0'),
     minimumQuantity: decimal('minimum_quantity').notNull().default('0'),
     maximumQuantity: decimal('maximum_quantity').notNull().default('0'),
-    deletedAt: timestamp('deleted_at'),
+    deletedAt: datetime('deleted_at'),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),
 });

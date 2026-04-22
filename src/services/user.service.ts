@@ -2,14 +2,14 @@ import { eq } from "drizzle-orm";
 import { db } from "../db/connection";
 import { NewUser, User, users } from "../db/schema";
 import bcrypt from 'bcrypt';
+import { AppError } from "../utils/apperror";
 
 export const createUser = async (data: NewUser) => {
     // 1 Verificar se o email já existe
 
     const existingUser = await getUserByEmail(data.email);
     if (existingUser) {
-        throw new Error('Email já está em uso.');
-        //throw new AppError('Email já está em uso.', 400);
+       throw new AppError('Email já está em uso.', 400);
     }
 
     // 2 Criar hash da senha

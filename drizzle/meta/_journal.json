@@ -8,6 +8,27 @@
       "when": 1776426656170,
       "tag": "0000_crazy_dagger",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1776896018414,
+      "tag": "0001_safe_king_bedlam",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1776896314840,
+      "tag": "0002_daffy_tyrannus",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1776896401713,
+      "tag": "0003_dark_colleen_wing",
+      "breakpoints": true
     }
   ]
 }
