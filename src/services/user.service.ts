@@ -30,6 +30,22 @@ export const logout = async (token: string) => {
     .where(eq(users.token, token));
 };
 
+export const validateToken = async (token: string) => {
+    const result = await db
+    .select()
+    .from(users)
+    .where(eq(users.token, token))
+    .limit(1);
+
+    const user = result[0]
+
+    if(!user || user.deletedAt){
+        return null;
+    }
+
+    return user;
+}
+
 export const createUser = async (data: NewUser) => {
   // 1 Verificar se o email já existe
 
