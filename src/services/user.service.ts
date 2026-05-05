@@ -31,20 +31,20 @@ export const logout = async (token: string) => {
 };
 
 export const validateToken = async (token: string) => {
-    const result = await db
+  const result = await db
     .select()
     .from(users)
     .where(eq(users.token, token))
     .limit(1);
 
-    const user = result[0]
+  const user = result[0];
 
-    if(!user || user.deletedAt){
-        return null;
-    }
+  if (!user || user.deletedAt) {
+    return null;
+  }
 
-    return user;
-}
+  return user;
+};
 
 export const createUser = async (data: NewUser) => {
   // 1 Verificar se o email já existe
@@ -92,6 +92,22 @@ export const getUserByEmail = async (email: string) => {
   return user;
 };
 
+export const getUserById = async (id: string) => {
+  const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
+
+  const user = result[0];
+  if (!user || user.deletedAt) {
+    return null;
+  }
+  return user;
+};
+export const getUserByIdPublic = async (id: string) => {
+  const user = await getUserById(id);
+  if (!user) return null;
+
+  return formatUser(user);
+};
+
 export const hashPassword = async (password: string) => {
   return await bcrypt.hash(password, 10);
 };
@@ -106,5 +122,7 @@ export const formatUser = (user: User) => {
   if (userWithoutPassword.avatar) {
     userWithoutPassword.avatar = `${process.env.BASE_URL}/static/avatars/${userWithoutPassword.avatar}`;
   }
-  return userWithoutPassword;
+
+  const { id, name, email, avatar, role } = userWithoutPassword;
+  return { id, name, email, avatar, role };
 };
